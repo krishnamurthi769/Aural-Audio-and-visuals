@@ -274,7 +274,8 @@ body.hovering .cursor-outline {
 .hero-subtitle {
     font-size: 1.5rem;
     color: var(--text-muted);
-    margin-bottom: 50px;
+    margin-bottom: 25px;
+    /* Reduced from 50px */
     letter-spacing: 2px;
     text-transform: uppercase;
     display: inline-block;
