@@ -73,13 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 1,
             ease: "power2.out"
         }, "-=0.8")
-        .from('.hero-btns a', {
-            y: 20,
-            opacity: 0,
-            stagger: 0.2,
-            duration: 0.8,
-            ease: "mode.out"
-        }, "-=0.6")
+        // Buttons are static for visibility
         .from('.visualizer-container', {
             opacity: 0,
             duration: 1

@@ -17,10 +17,16 @@
 }
 
 body {
+    background: linear-gradient(135deg, #2b0000 0%, #00002b 100%);
+    /* Deep Red to Deep Blue */
     background-color: var(--bg-color);
+    /* Fallback */
+    background-attachment: fixed;
+    /* Keep gradient fixed during scroll */
     color: var(--text-color);
     font-family: var(--font-main);
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 a {
@@ -87,6 +93,23 @@ body.hovering .cursor-outline {
 .btn-primary:hover {
     background-color: transparent;
     color: var(--accent);
+}
+
+.btn-call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    min-width: 250px;
+    /* Ensure sufficient width */
+}
+
+.btn-icon {
+    font-size: 1.4rem;
+    /* Larger icon */
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+    /* Subtle shadow for clarity */
 }
 
 .btn-secondary {
@@ -217,7 +240,7 @@ body.hovering .cursor-outline {
     font-size: 25vw;
     font-weight: 900;
     color: transparent;
-    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.03);
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
     z-index: 1;
     white-space: nowrap;
     pointer-events: none;
@@ -389,20 +412,33 @@ body.hovering .cursor-outline {
 
 .service-card h3 {
     font-size: 2rem;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-weight: 700;
-}
-
-.service-card p {
-    color: var(--text-muted);
-    transform: translateY(10px);
-    opacity: 0;
     transition: 0.4s;
 }
 
-.service-card:hover p {
+.service-card p {
+    color: var(--accent);
+    /* Tagline visible always */
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.service-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transform: translateY(20px);
+    opacity: 0 !important;
+    /* Force hide initially */
+    transition: all 0.4s ease 0.1s;
+    font-weight: 300;
+    display: block;
+}
+
+.service-card:hover .service-desc {
     transform: translateY(0);
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 /* Marquee */
@@ -482,8 +518,25 @@ body.hovering .cursor-outline {
 }
 
 .event-card:hover .event-content h3 {
-    transform: translateY(0);
+    transform: translateY(-5px);
+    /* Move Title UP to make room */
     color: var(--accent);
+}
+
+.event-content p {
+    color: rgba(255, 255, 255, 0.8);
+    /* Brighter text for visibility */
+    font-size: 0.95rem;
+    margin-top: 8px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s ease 0.1s;
+    font-weight: 300;
+}
+
+.event-card:hover .event-content p {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 /* Owner / Vision */
