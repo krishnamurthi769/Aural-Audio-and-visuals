@@ -745,8 +745,8 @@ body.hovering .cursor-outline {
         transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 999;
         display: flex;
-        padding-top: 60px;
         /* Space for header */
+        overflow-y: auto;
     }
 
     .nav-links.active {
@@ -830,7 +830,30 @@ body.hovering .cursor-outline {
 
     .events-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: 250px;
+        grid-auto-rows: auto;
+        /* Allow content to define height */
+        gap: 30px;
+    }
+
+    /* Force visibility of hover text on mobile since hover doesn't exist */
+    .service-desc,
+    .event-content p {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        margin-top: 10px;
+        position: relative;
+    }
+
+    .event-content {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+        /* Stronger gradient for readability */
+    }
+
+    .btn-call {
+        display: flex;
+        width: 100%;
+        min-width: 0;
+        /* Reset min-width */
     }
 
     .event-card.wide,
