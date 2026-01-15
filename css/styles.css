@@ -6,6 +6,111 @@
     --border: #333333;
     --font-main: 'Outfit', sans-serif;
     --cursor-size: 20px;
+
+    /* GLOBAL SPACING TOKENS */
+    --section-padding-desktop: 72px;
+    --section-padding-mobile: 44px;
+}
+
+/* ... existing code ... */
+
+/* GLOBAL SECTION SPACING FIX */
+/* Kept ONE system only */
+.section {
+    padding: clamp(40px, 6vw, 96px) 20px;
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: var(--section-padding-mobile) 16px;
+    }
+}
+
+/* TYPOGRAPHY SCALE FIX */
+h1 {
+    font-size: clamp(28px, 6vw, 42px);
+}
+
+h2,
+.section-title {
+    font-size: clamp(22px, 5vw, 32px) !important;
+    margin-bottom: 30px;
+}
+
+p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ... existing code ... */
+
+/* Owner / Vision - REFANCY WITH GAP */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    /* Controlled gap */
+    align-items: center;
+}
+
+/* Mobile Vision Fix */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .owner-card {
+        border-left: none;
+        border-top: 2px solid #333;
+        padding-left: 0;
+        padding-top: 30px;
+    }
+}
+
+.vision-quote {
+    font-size: clamp(1.4rem, 4vw, 2.5rem);
+    line-height: 1.3;
+    margin-bottom: 0;
+    /* Let grid gap handle it */
+    font-weight: 300;
+}
+
+.owner-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* DENSITY FIX */
+}
+
+.owner-role {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+    /* Remove margin */
+}
+
+.owner-name {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin-bottom: 0;
+    /* Remove margin */
+    color: #fff;
+}
+
+.owner-bio {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin-bottom: 0;
+    /* Remove margin */
+}
+
+.signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    opacity: 0.5;
+    margin-top: 10px;
 }
 
 * {
@@ -45,6 +150,14 @@ ul {
 }
 
 /* Custom Cursor */
+@media (hover: none) {
+
+    .cursor-dot,
+    .cursor-outline {
+        display: none !important;
+    }
+}
+
 .cursor-dot,
 .cursor-outline {
     position: fixed;
@@ -220,45 +333,125 @@ body.hovering .cursor-outline {
     transition: 0.3s;
 }
 
-/* Hero */
+/* Comprehensive Mobile & Design Fixes */
+
+/* 1. Hero Height & Padding */
 .hero {
-    height: 100vh;
+    min-height: 100svh;
+    padding-top: 96px;
+    padding-bottom: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    padding-top: 80px;
-    border-bottom: 1px solid var(--border);
     overflow: hidden;
+    position: relative;
 }
 
+/* 2. Hero Content Grouping */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    /* Critical Gap Fix */
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    text-align: center;
+}
+
+.hero-subtitle {
+    margin-bottom: 0;
+    /* Let gap handle spacing */
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+/* 3. Background Text "AURAL" Fix */
 .hero-bg-fill {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 25vw;
+    font-size: 200px;
+    /* Reduced specific size */
     font-weight: 900;
-    color: transparent;
-    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.05);
+    /* Very subtle */
+    -webkit-text-stroke: 0;
+    /* Remove stroke for filled low opacity look, or keep subtle stroke if preferred */
     z-index: 1;
     white-space: nowrap;
     pointer-events: none;
     user-select: none;
+    letter-spacing: 12px;
+    filter: blur(1px);
+    /* Premium blur */
 }
 
-.hero-content {
-    text-align: center;
-    z-index: 2;
+/* 4. Section Spacing System */
+
+
+/* 5. Mobile Adjustments */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 90svh;
+        padding-top: 72px;
+        padding-bottom: 48px;
+    }
+
+    .section {
+        padding: 40px 16px;
+    }
+
+
+
+    .hero-bg-fill {
+        font-size: 80px;
+        /* Smaller bg text on mobile */
+    }
+}
+
+/* 6. Section Divider */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 0;
     position: relative;
+    z-index: 5;
 }
 
-.hero-title {
-    font-size: 6rem;
-    line-height: 0.9;
-    margin-bottom: 40px;
-    font-weight: 900;
-    text-transform: uppercase;
+/* 7. Equipment Rentals Pull-Up */
+#services {
+    margin-top: -40px;
+    /* Visual continuity */
+    position: relative;
+    z-index: 5;
+    /* Ensure above divider */
+    padding-top: 0;
+    /* Let margin handle the feel */
+}
+
+/* Mobile Tweaks for Pull Up */
+@media (max-width: 768px) {
+    #services {
+        margin-top: 12px;
+        padding-top: 24px;
+    }
+}
+
+/* Fix Hero Buttons inside Flex Container */
+.hero-btns {
+    margin-top: 10px;
+    /* Slight extra gap for buttons */
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .hero-title .line {
@@ -271,103 +464,72 @@ body.hovering .cursor-outline {
     transform: translateY(100%);
 }
 
-.hero-subtitle {
-    font-size: 1.5rem;
-    color: var(--text-muted);
-    margin-bottom: 25px;
-    /* Reduced from 50px */
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: inline-block;
-}
+
 
 /* Visualizer */
-.visualizer-container {
+/* Music Animation */
+.music-animation {
     position: absolute;
+    bottom: 32px;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 50px;
     display: flex;
-    gap: 8px;
-    align-items: flex-end;
-    height: 60px;
+    gap: 10px;
+    /* MORE spacing */
     z-index: 2;
+    pointer-events: none;
 }
 
-.bar {
-    width: 10px;
-    background-color: #fff;
-    height: 10px;
-    animation: bounce 1s infinite ease-in-out alternate;
+.music-animation span {
+    width: 8px;
+    /* thicker bars */
+    height: 32px;
+    /* base height increased */
+    background: #fff;
+    opacity: 0.85;
+    transform-origin: bottom;
+    animation: equalize 1.6s ease-in-out infinite alternate;
 }
 
-/* Random delays for visualizer */
-.bar:nth-child(1) {
-    height: 40%;
-    animation-delay: 0.1s;
+/* stagger */
+.music-animation span:nth-child(odd) {
+    animation-delay: .2s;
 }
 
-.bar:nth-child(2) {
-    height: 70%;
-    animation-delay: 0.3s;
+.music-animation span:nth-child(even) {
+    animation-delay: .4s;
 }
 
-.bar:nth-child(3) {
-    height: 50%;
-    animation-delay: 0.2s;
-}
-
-.bar:nth-child(4) {
-    height: 90%;
-    animation-delay: 0.4s;
-}
-
-.bar:nth-child(5) {
-    height: 30%;
-    animation-delay: 0.1s;
-}
-
-.bar:nth-child(6) {
-    height: 80%;
-    animation-delay: 0.5s;
-}
-
-.bar:nth-child(7) {
-    height: 60%;
-    animation-delay: 0.2s;
-}
-
-.bar:nth-child(8) {
-    height: 100%;
-    animation-delay: 0.3s;
-}
-
-.bar:nth-child(9) {
-    height: 40%;
-    animation-delay: 0.1s;
-}
-
-.bar:nth-child(10) {
-    height: 70%;
-    animation-delay: 0.4s;
-}
-
-@keyframes bounce {
-    0% {
-        height: 10%;
-        opacity: 0.3;
+@keyframes equalize {
+    from {
+        transform: scaleY(0.35);
+        opacity: 0.45;
     }
 
-    100% {
-        height: 100%;
+    to {
+        transform: scaleY(1.3);
+        /* BIGGER PEAK */
         opacity: 1;
     }
 }
 
-/* Sections */
-.section {
-    padding: 120px 0;
+@media (max-width: 768px) {
+    .music-animation {
+        bottom: 52px;
+        /* move UP from bottom */
+        transform: translateX(-50%) scale(0.9);
+        gap: 8px;
+        opacity: 0.7;
+    }
+
+    .music-animation span {
+        width: 6px;
+        height: 24px;
+    }
 }
+
+/* Sections */
+
 
 .section-title {
     font-size: 3rem;
@@ -596,17 +758,27 @@ body.hovering .cursor-outline {
 }
 
 /* Stats */
+/* Stats - DENSITY FIX */
 .about-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 20px;
+    /* Tighter gap */
 }
 
 .stat-item {
     border: 1px solid var(--border);
-    padding: 30px;
+    padding: 24px;
+    /* Reduced padding */
     text-align: center;
     transition: 0.3s;
+    aspect-ratio: 1 / 1;
+    /* Square density */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .stat-item:hover {
@@ -616,10 +788,22 @@ body.hovering .cursor-outline {
 
 .stat-num {
     display: block;
-    font-size: 3.5rem;
-    font-weight: 900;
-    margin-bottom: 10px;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    /* Responsive font */
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
 }
+
+.stat-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+
 
 .stat-label {
     color: var(--text-muted);
@@ -782,88 +966,126 @@ body.hovering .cursor-outline {
 
     /* Layout Adjustments */
     .container {
-        padding: 0 20px;
+        padding: 32px 16px;
+        /* FIX: Vertical Rhythm */
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .hero {
-        padding-top: 60px;
+        min-height: 85vh;
+        /* Fix: Force safe height */
+        overflow: visible;
+        /* Fix: CRITICAL - Stop clipping */
+        position: relative;
+        padding-top: 70px;
+        align-items: flex-start;
     }
 
+    .hero-content {
+        margin-top: 72px;
+        gap: 12px;
+        position: relative;
+        z-index: 3;
+        /* Fix: Ensure text is on top */
+    }
+
+    /* FIX: MOBILE SAFE MOOD ANIMATION - GUARANTEED CONFIG */
+    .music-animation {
+        display: flex !important;
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.85);
+        opacity: 0.7;
+        z-index: 2;
+        pointer-events: none;
+        height: auto;
+        gap: 6px;
+    }
+
+    .bar {
+        width: 6px;
+        animation-duration: 1.6s;
+        /* Fix: Lightweight speed */
+    }
+
+    /* Compact Hero Title */
     .hero-title {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
+        font-size: clamp(28px, 6vw, 44px);
+        /* Clamped Scale */
+        line-height: 1.1;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* Bg Text adjustment */
+    .hero-bg-fill {
+        font-size: 90px;
+        opacity: 0.04;
+        filter: blur(2px);
+    }
+
+    /* Marquee Fix - Prevent Overflow */
+    .marquee-content {
+        font-size: 1rem;
+        /* Small enough to not cause layout shifts */
+        line-height: 1.2;
+        padding: 10px 0;
+    }
+
+    /* Section Title - Fix "EVENTS COVERAGE" cut off */
+    .section-title {
+        font-size: 1.5rem;
+        /* Drastic reduction for long words */
+        margin-bottom: 25px;
+        word-wrap: break-word;
+        /* Safety net */
+    }
+
+    /* Events Grid - Fix Overflow */
+    .events-grid {
+        gap: 20px;
+        /* Tighter gap */
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Fix Image fitting in cards */
+    .event-card,
+    .service-card {
+        width: 100%;
+        max-width: 100%;
+        background-size: cover;
+        /* Ensure image covers fully */
+        background-position: center;
+    }
+
+    /* Button Tweak */
+    .hero-btns {
+        margin-top: 14px;
+        margin-bottom: 10px;
     }
 
     .hero-subtitle {
-        font-size: 1rem;
-        margin-bottom: 30px;
-    }
-
-    .hero-btns {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        width: 100%;
-        margin-left: 0;
-        padding: 15px 0;
-        text-align: center;
-    }
-
-    .section {
-        padding: 60px 0;
-    }
-
-    .section-title {
-        font-size: 2rem;
-        margin-bottom: 40px;
-    }
-
-    /* Grid Resets for Mobile */
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .events-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: auto;
-        /* Allow content to define height */
-        gap: 30px;
-    }
-
-    /* Force visibility of hover text on mobile since hover doesn't exist */
-    .service-desc,
-    .event-content p {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        margin-top: 10px;
-        position: relative;
-    }
-
-    .event-content {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
-        /* Stronger gradient for readability */
+        margin-bottom: 10px;
     }
 
     .btn-call {
-        display: flex;
-        width: 100%;
-        min-width: 0;
-        /* Reset min-width */
+        width: 90%;
+        /* Slight breathing room */
+        margin: 0 auto;
     }
 
-    .event-card.wide,
-    .event-card.tall {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-
-    .vision-quote {
-        font-size: 1.8rem;
+    /* Footer Fixes */
+    .footer-content {
+        padding: 0 10px;
+        /* Edge padding */
     }
 
     .contact-layout {
@@ -879,25 +1101,73 @@ body.hovering .cursor-outline {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+        width: 100%;
+        overflow: hidden;
     }
 
     .footer-bottom {
         flex-direction: column;
         text-align: center;
-        gap: 10px;
+        gap: 15px;
     }
 
-    /* Hide Desktop-only Effects */
-    .visualizer-container {
-        display: none;
+    .footer-col {
+        width: 100%;
+        overflow-wrap: break-word;
+        /* Ensure text wraps */
     }
 
-    .cursor-dot,
-    .cursor-outline {
-        display: none;
+    /* E-mail specific fix */
+    .footer-links a[href^="mailto"] {
+        word-break: break-all;
+        font-size: 1rem;
     }
+
+
 
     * {
         cursor: auto !important;
+    }
+
+    /* Global Mobile Fixes */
+    html,
+    body {
+        overflow-x: hidden;
+        /* Prevent horizontal scroll */
+        width: 100%;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Typography Resizing */
+
+
+    .hero-title .word {
+        display: inline;
+        /* Prevent weird block breaking */
+    }
+
+    .owner-name {
+        font-size: 1.8rem;
+        /* Resize large name */
+    }
+
+    .vision-quote {
+        font-size: 1.4rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        /* Smaller section headers */
+    }
+
+    .container {
+        padding: 0 15px;
+        /* Slightly more space */
+        width: 100%;
+        box-sizing: border-box;
     }
 }

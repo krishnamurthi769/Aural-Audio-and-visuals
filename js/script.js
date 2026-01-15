@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Custom Cursor Logic ---
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
+    const isMobile = window.matchMedia('(hover: none)').matches;
 
     // --- Mobile Menu ---
     const hamburger = document.querySelector('.hamburger');
@@ -31,31 +32,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    window.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
+    if (!isMobile) {
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
 
-        // Dot follows instantly
-        cursorDot.style.left = `${posX}px`;
-        cursorDot.style.top = `${posY}px`;
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
 
-        // Outline follows with lag (GSAP for smoothness)
-        gsap.to(cursorOutline, {
-            x: posX,
-            y: posY,
-            duration: 0.15,
-            ease: "power2.out",
-            xPercent: -50,
-            yPercent: -50
+            // Outline follows with lag (GSAP for smoothness)
+            gsap.to(cursorOutline, {
+                x: posX,
+                y: posY,
+                duration: 0.15,
+                ease: "power2.out",
+                xPercent: -50,
+                yPercent: -50
+            });
         });
-    });
 
-    // Hover effects for cursor
-    const hoverables = document.querySelectorAll('a, .magnetic, .service-card');
-    hoverables.forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-    });
+        // Hover effects for cursor
+        const hoverables = document.querySelectorAll('a, .magnetic, .service-card');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+    }
 
     // --- Hero Animation (Text Reveal) ---
     const tl = gsap.timeline();
@@ -72,12 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
             x: -20,
             duration: 1,
             ease: "power2.out"
-        }, "-=0.8")
-        // Buttons are static for visibility
-        .from('.visualizer-container', {
+        }, "-=0.8");
+
+    // Check if music animation exists before adding to timeline
+    if (document.querySelector('.music-animation')) {
+        tl.from('.music-animation', {
             opacity: 0,
             duration: 1
         }, "-=0.5");
+    }
 
 
     // --- Services Scroll Animation ---
